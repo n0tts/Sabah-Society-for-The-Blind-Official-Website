@@ -35,6 +35,6 @@ jobs:
           local-dir: dist/
           # Adjust server-dir to the correct path on your cPanel host
           # Usually public_html/ or public_html/subdomain/
-          server-dir: public_html/
+          server-dir: ./
           # Set to true if you want to see what will happen without uploading
           dry-run: false
