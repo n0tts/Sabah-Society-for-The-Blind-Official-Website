@@ -1,0 +1,40 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build & Sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚀 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🟢 Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: 🏗️ Build Astro
+        run: npm run build
+
+      - name: 📂 Sync files (cPanel)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist/
+          # Adjust server-dir to the correct path on your cPanel host
+          # Usually public_html/ or public_html/subdomain/
+          server-dir: public_html/
+          # Set to true if you want to see what will happen without uploading
+          dry-run: false
