@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+import historyImage from '../assets/blind-training-class.jpg';
+---
+
+<BaseLayout 
+	title="History | Sabah Society for the Blind"
+	image={historyImage.src}
+>
+	<Header />
+
+	<main>
+		<!-- Hero Section -->
+		<section class="bg-primary text-white py-20">
+			<div class="container mx-auto px-4">
+				<div class="max-w-3xl">
+					<h1 class="text-4xl md:text-5xl font-heading font-bold mb-6">Our History</h1>
+					<p class="text-xl text-slate-200 leading-relaxed">
+						Since 1966, Sabah Society for the Blind has grown from early training-centre efforts into a long-serving organization supporting blind and visually impaired people throughout Sabah.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- History Content -->
+		<section class="py-20 bg-white">
+			<div class="container mx-auto px-4">
+				<div class="flex flex-col md:flex-row-reverse gap-12 items-start">
+					<div class="md:w-1/2 sticky top-24">
+						<div class="rounded-2xl overflow-hidden shadow-xl border-4 border-slate-100">
+							<Image src={historyImage} alt="Historical training session at Sabah Society for the Blind" class="w-full h-auto" />
+							<div class="bg-slate-100 p-4 italic text-sm text-slate-600 text-center">
+								A legacy of service since 1966
+							</div>
+						</div>
+					</div>
+					<div class="md:w-1/2">
+						<h2 class="text-3xl font-heading text-primary mb-8">A Legacy of Service Since 1966</h2>
+						<div class="space-y-8 prose prose-slate max-w-none">
+							<p class="text-lg text-slate-700 leading-relaxed">
+								The organization’s history reflects decades of dedication to training, support, and advocacy for visually impaired communities in Sabah. From its early roots to its broader reach today, the organization has continued to serve with care, resilience, and purpose.
+							</p>
+							
+							<div class="relative pl-8 border-l-2 border-accent space-y-12 py-4">
+								<div>
+									<div class="absolute -left-[9px] w-4 h-4 rounded-full bg-accent"></div>
+									<h3 class="font-heading text-xl text-primary mb-2 italic">1962</h3>
+									<p class="text-slate-600">Training roots began with the Wallace Training Centre for the Blind in Tuaran, focusing on practical skills development.</p>
+								</div>
+								<div>
+									<div class="absolute -left-[9px] w-4 h-4 rounded-full bg-accent"></div>
+									<h3 class="font-heading text-xl text-primary mb-2 italic">1966</h3>
+									<p class="text-slate-600">Official establishment of the Sabah Society for the Blind, formalizing the mission to serve visually impaired individuals state-wide.</p>
+								</div>
+								<div>
+									<div class="absolute -left-[9px] w-4 h-4 rounded-full bg-accent"></div>
+									<h3 class="font-heading text-xl text-primary mb-2 italic">Growth & Expansion</h3>
+									<p class="text-slate-600">Expansion through branches in Sandakan, Keningau, and Tawau, extending support beyond one district to serve the wider Sabah community.</p>
+								</div>
+								<div>
+									<div class="absolute -left-[9px] w-4 h-4 rounded-full bg-accent"></div>
+									<h3 class="font-heading text-xl text-primary mb-2 italic">Today</h3>
+									<p class="text-slate-600">A robust organization continuing to operate training and support efforts that rely on public generosity and community partnership.</p>
+								</div>
+							</div>
+							
+							<p class="text-lg text-slate-700 leading-relaxed mt-12">
+								Our journey through the years is built on decades of service, ensuring that every visually impaired person in Sabah is seen, supported, and given the chance to live with dignity.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</BaseLayout>

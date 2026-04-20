@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #010165;
+  --color-accent: #06D6A0;
+  --font-heading: "Oswald", sans-serif;
+  --font-body: "Manrope", sans-serif;
+  
+  /* High Contrast variables */
+  --color-hc-bg: #000000;
+  --color-hc-text: #ffffff;
+  --color-hc-accent: #ffff00;
+}
+
+@layer base {
+  :root {
+    --primary: #010165;
+    --accent: #06D6A0;
+  }
+
+  body {
+    @apply font-body bg-white text-slate-900 transition-colors duration-200;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading uppercase tracking-tight;
+  }
+
+  /* Global Focus States */
+  *:focus-visible {
+    @apply outline-none ring-4 ring-accent ring-offset-2;
+  }
+
+  /* Accessibility: Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* High Contrast Mode */
+  :root.high-contrast {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .high-contrast body {
+    background-color: #000 !important;
+    color: #fff !important;
+  }
+
+  .high-contrast * {
+    border-color: #fff !important;
+  }
+
+  .high-contrast a, 
+  .high-contrast button {
+    color: #ffff00 !important;
+    text-decoration: underline !important;
+  }
+
+  .high-contrast .btn-primary {
+    background-color: #000 !important;
+    color: #ffff00 !important;
+    border: 2px solid #ffff00 !important;
+  }
+}

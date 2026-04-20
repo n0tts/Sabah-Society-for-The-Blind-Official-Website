@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+---
+
+<BaseLayout title="Contact Us | Sabah Society for the Blind">
+	<Header />
+
+	<main>
+		<!-- Hero Section -->
+		<section class="bg-primary text-white py-20">
+			<div class="container mx-auto px-4">
+				<div class="max-w-3xl">
+					<h1 class="text-4xl md:text-5xl font-heading font-bold mb-6">Get in Touch</h1>
+					<p class="text-xl text-slate-200 leading-relaxed">
+						Reach out for general enquiries, support information, partnership opportunities, or ways to contribute to the mission of Sabah Society for the Blind.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Contact Content -->
+		<section class="py-20 bg-white">
+			<div class="container mx-auto px-4">
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+					<!-- Contact Info -->
+					<div>
+						<h2 class="text-3xl font-heading text-primary mb-8 underline decoration-accent decoration-4 underline-offset-8">We’re Here to Help</h2>
+						<p class="text-lg text-slate-700 leading-relaxed mb-12">
+							Whether you need information, want to support the organization, or wish to partner with the team, this is the place to start. The team welcomes enquiries from families, donors, volunteers, and community partners across Sabah.
+						</p>
+
+						<div class="space-y-8">
+							<div class="flex items-start space-x-4">
+								<div class="p-3 bg-slate-100 rounded-lg text-primary">
+									<!-- Icon placeholder -->
+									<span class="font-bold">ADDR</span>
+								</div>
+								<div>
+									<h3 class="font-heading text-lg text-primary uppercase">Main Office</h3>
+									<p class="text-slate-600">Off Jalan Tuaran, KM 4, Likas, 88999 Kota Kinabalu, Sabah, Malaysia</p>
+								</div>
+							</div>
+
+							<div class="flex items-start space-x-4">
+								<div class="p-3 bg-slate-100 rounded-lg text-primary">
+									<span class="font-bold">EMAIL</span>
+								</div>
+								<div>
+									<h3 class="font-heading text-lg text-primary uppercase">Email Address</h3>
+									<p class="text-slate-600">info@sabahblind.org</p>
+								</div>
+							</div>
+
+							<div class="flex items-start space-x-4">
+								<div class="p-3 bg-slate-100 rounded-lg text-primary">
+									<span class="font-bold">PHONE</span>
+								</div>
+								<div>
+									<h3 class="font-heading text-lg text-primary uppercase">Phone Number</h3>
+									<p class="text-slate-600">+60 88-235 002</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="mt-12">
+							<h3 class="font-heading text-lg text-primary uppercase mb-4">Other Branches</h3>
+							<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+								<div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+									<p class="font-bold">Sandakan</p>
+								</div>
+								<div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+									<p class="font-bold">Tawau</p>
+								</div>
+								<div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+									<p class="font-bold">Keningau</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Contact Form -->
+					<div class="bg-slate-50 p-8 md:p-12 rounded-3xl border border-slate-200">
+						<h2 class="text-2xl font-heading text-primary mb-8 uppercase">Send us a message</h2>
+						<form class="space-y-6">
+							<div>
+								<label for="name" class="block text-sm font-bold uppercase text-slate-500 mb-2">Your Name</label>
+								<input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-4 focus:ring-accent focus:outline-none transition-all" required>
+							</div>
+							<div>
+								<label for="email" class="block text-sm font-bold uppercase text-slate-500 mb-2">Email Address</label>
+								<input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-4 focus:ring-accent focus:outline-none transition-all" required>
+							</div>
+							<div>
+								<label for="subject" class="block text-sm font-bold uppercase text-slate-500 mb-2">Subject</label>
+								<select id="subject" name="subject" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-4 focus:ring-accent focus:outline-none transition-all">
+									<option>General Enquiry</option>
+									<option>Donation Enquiry</option>
+									<option>Volunteering</option>
+									<option>Partnership</option>
+								</select>
+							</div>
+							<div>
+								<label for="message" class="block text-sm font-bold uppercase text-slate-500 mb-2">Message</label>
+								<textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-4 focus:ring-accent focus:outline-none transition-all" required></textarea>
+							</div>
+							<Button type="submit" variant="primary" class="w-full">Send Message</Button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Map Section (Placeholder) -->
+		<section class="h-96 w-full bg-slate-200 grayscale contrast-125">
+			<div class="flex items-center justify-center h-full text-slate-400 font-heading uppercase tracking-widest">
+				Map Section: Kota Kinabalu HQ
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</BaseLayout>

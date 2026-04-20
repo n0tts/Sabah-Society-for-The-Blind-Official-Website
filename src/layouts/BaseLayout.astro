@@ -1,0 +1,108 @@
+---
+import '../styles/global.css';
+import defaultImage from '../assets/food-donation-for-blind-hq.jpg';
+import favicon from '../assets/favicon.png';
+
+interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+	type?: string;
+}
+
+const { 
+	title, 
+	description = "Official website of Sabah Society for the Blind (SSB). Dedicated to supporting blind and visually impaired individuals in Sabah.",
+	image = defaultImage.src,
+	type = "website"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || "");
+const socialImageURL = new URL(image, Astro.site || "");
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  "name": "Sabah Society for the Blind",
+  "url": Astro.site?.toString(),
+  "logo": new URL(favicon.src, Astro.site || "").toString(),
+  "description": description,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Off Jalan Tuaran, KM 4, Likas",
+    "addressLocality": "Kota Kinabalu",
+    "addressRegion": "Sabah",
+    "postalCode": "88999",
+    "addressCountry": "MY"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+60-88-235-002",
+    "contactType": "general",
+    "email": "info@sabahblind.org"
+  },
+  "sameAs": [
+    "https://facebook.com/sabahblindsociety",
+    "https://instagram.com/sabahblindsociety"
+  ]
+};
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/png" href={favicon.src} />
+		<link rel="canonical" href={canonicalURL} />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Primary Meta Tags -->
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+
+		<!-- Open Graph / Facebook / WhatsApp -->
+		<meta property="og:type" content={type} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={socialImageURL} />
+		<meta property="og:site_name" content="Sabah Society for the Blind" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={canonicalURL} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={socialImageURL} />
+
+		<!-- JSON-LD Schema -->
+		<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+
+		<!-- Google Fonts: Oswald (Headings) and Manrope (Body) -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+
+		<!-- Inline script to apply High Contrast mode immediately (prevents flashing) -->
+		<script is:inline>
+			const getTheme = () => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('ssb-hc-mode') === 'enabled') {
+					return 'high-contrast';
+				}
+				return 'normal';
+			};
+
+			const theme = getTheme();
+			if (theme === 'high-contrast') {
+				document.documentElement.classList.add('high-contrast');
+			} else {
+				document.documentElement.classList.remove('high-contrast');
+			}
+		</script>
+	</head>
+	<body class="min-h-screen flex flex-col">
+		<slot />
+	</body>
+</html>

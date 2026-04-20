@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+---
+
+<BaseLayout title="Our Mission | Sabah Society for the Blind">
+	<Header />
+
+	<main>
+		<!-- Hero Section -->
+		<section class="bg-primary text-white py-20">
+			<div class="container mx-auto px-4">
+				<div class="max-w-3xl">
+					<h1 class="text-4xl md:text-5xl font-heading font-bold mb-6">Our Mission</h1>
+					<p class="text-xl text-slate-200 leading-relaxed">
+						To advocate the rights of blind and visually impaired people and provide the support, services, and opportunities they need to live with dignity, confidence, and independence.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Mission Details -->
+		<section class="py-20 bg-white">
+			<div class="container mx-auto px-4 max-w-4xl">
+				<div class="space-y-12">
+					<div>
+						<h2 class="text-3xl font-heading text-primary mb-6">Creating Opportunity Through Support</h2>
+						<p class="text-lg text-slate-700 leading-relaxed">
+							The mission is to empower blind and visually impaired individuals through education, practical support, and equal opportunity in society. The organization works to ensure that every visually impaired person is seen, supported, and given the chance to thrive.
+						</p>
+					</div>
+
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+						<div class="bg-slate-50 p-8 rounded-2xl">
+							<h3 class="text-xl font-heading text-primary mb-4">Advocacy</h3>
+							<p class="text-slate-600">Promoting the rights and social inclusion of visually impaired people at all levels of society.</p>
+						</div>
+						<div class="bg-slate-50 p-8 rounded-2xl">
+							<h3 class="text-xl font-heading text-primary mb-4">Care</h3>
+							<p class="text-slate-600">Providing welfare, housing, and personal support for those who need it most.</p>
+						</div>
+						<div class="bg-slate-50 p-8 rounded-2xl">
+							<h3 class="text-xl font-heading text-primary mb-4">Training</h3>
+							<p class="text-slate-600">Developing practical skills for daily living and economic independence.</p>
+						</div>
+						<div class="bg-slate-50 p-8 rounded-2xl">
+							<h3 class="text-xl font-heading text-primary mb-4">Independence</h3>
+							<p class="text-slate-600">Empowering individuals to lead confident, self-reliant lives within their communities.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Vision Quote -->
+		<section class="py-20 bg-accent text-primary">
+			<div class="container mx-auto px-4 text-center">
+				<blockquote class="max-w-4xl mx-auto">
+					<p class="text-2xl md:text-4xl font-heading uppercase italic mb-8">
+						"Advocacy, Care, and Independence: Building a More Inclusive Sabah for Everyone."
+					</p>
+					<cite class="text-sm uppercase tracking-widest font-bold">— Sabah Society for the Blind</cite>
+				</blockquote>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</BaseLayout>

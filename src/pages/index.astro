@@ -1,17 +1,218 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import { Image } from 'astro:assets';
 
+// Import real images from assets
+import heroImage from '../assets/blind-training.jpg';
+import communityImage from '../assets/food-donation-for-blind-hq.jpg';
+import trainingCardImage from '../assets/blind-training-class.jpg';
+import caringCardImage from '../assets/blind-foot-massage.jpg';
+import advocacyCardImage from '../assets/shbh-booth-exhibition.jpg';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout 
+	title="Home | Sabah Society for the Blind"
+	image={heroImage.src}
+>
+	<Header />
+
+	<main>
+		<!-- Hero Section -->
+		<section class="relative bg-primary text-white min-h-[80vh] flex items-center overflow-hidden">
+			<!-- Background Image with Overlay -->
+			<div class="absolute inset-0 z-0">
+				<Image 
+					src={heroImage} 
+					alt="Visually impaired person receiving training" 
+					class="w-full h-full object-cover opacity-30 grayscale"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-transparent"></div>
+			</div>
+			
+			<div class="container mx-auto px-4 relative z-10">
+				<div class="max-w-3xl">
+					<span class="inline-block bg-accent text-primary px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
+						Serving Sabah Since 1966
+					</span>
+					<h1 class="text-4xl md:text-6xl font-heading font-bold mb-6 leading-tight">
+						Supporting Blind and Visually Impaired Lives Across Sabah
+					</h1>
+					<p class="text-xl text-slate-200 mb-10 leading-relaxed max-w-2xl">
+						Sabah Society for the Blind works to provide care, training, advocacy, and opportunity so blind and visually impaired individuals can live with dignity, confidence, and greater independence.
+					</p>
+					<div class="flex flex-wrap gap-4">
+						<Button variant="accent" href="/donate" class="shadow-lg shadow-accent/20">Donate Now</Button>
+						<Button variant="outline" href="/contact" class="!border-white !text-white hover:!bg-white hover:!text-primary">Contact Us</Button>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Intro Section: Who We Are -->
+		<section class="py-24 bg-white">
+			<div class="container mx-auto px-4">
+				<div class="flex flex-col md:flex-row items-center gap-16">
+					<div class="md:w-1/2">
+						<h2 class="text-4xl font-heading text-primary mb-8 border-l-8 border-accent pl-6 uppercase tracking-tight">Who We Are</h2>
+						<p class="text-xl text-slate-700 leading-relaxed mb-8 font-medium">
+							Sabah Society for the Blind is a non-profit organization dedicated to supporting blind and visually impaired individuals in Sabah. 
+						</p>
+						<p class="text-lg text-slate-600 leading-relaxed mb-10">
+							The organization advocates for their rights while providing services and opportunities that improve daily life, personal independence, and community inclusion. For over five decades, we have been a beacon of hope for those with little or no sight.
+						</p>
+						<Button variant="outline" href="/about">Our Story</Button>
+					</div>
+					<div class="md:w-1/2">
+						<div class="relative">
+							<div class="absolute -top-4 -left-4 w-24 h-24 bg-accent/20 rounded-full blur-xl"></div>
+							<div class="absolute -bottom-4 -right-4 w-32 h-32 bg-primary/10 rounded-full blur-xl"></div>
+							<Image 
+								src={communityImage} 
+								alt="Sabah Society for the Blind Community" 
+								class="rounded-3xl shadow-2xl relative z-10 w-full"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- What We Do Section -->
+		<section class="py-24 bg-slate-50">
+			<div class="container mx-auto px-4">
+				<div class="text-center max-w-3xl mx-auto mb-20">
+					<h2 class="text-4xl font-heading text-primary mb-6 uppercase tracking-tight">What We Do</h2>
+					<p class="text-xl text-slate-600 leading-relaxed">
+						Through care, training, welfare support, and community advocacy, we empower individuals to reach their full potential.
+					</p>
+				</div>
+				
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+					<!-- Service Card 1 -->
+					<div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full">
+						<div class="h-56 overflow-hidden">
+							<Image src={trainingCardImage} alt="Training and Skills Development" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+						</div>
+						<div class="p-8 flex flex-col flex-grow">
+							<h3 class="text-2xl font-heading text-primary mb-4 uppercase tracking-tighter">Training & Skills</h3>
+							<p class="text-slate-600 leading-relaxed mb-6 flex-grow">
+								Practical training helps individuals build confidence, independence, and work-related skills for daily living.
+							</p>
+							<a href="/about" class="text-primary font-bold uppercase text-xs tracking-widest border-b-2 border-accent pb-1 w-fit hover:text-accent">Learn More</a>
+						</div>
+					</div>
+
+					<!-- Service Card 2 -->
+					<div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full">
+						<div class="h-56 overflow-hidden">
+							<Image src={caringCardImage} alt="Care and Support Services" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+						</div>
+						<div class="p-8 flex flex-col flex-grow">
+							<h3 class="text-2xl font-heading text-primary mb-4 uppercase tracking-tighter">Care & Support</h3>
+							<p class="text-slate-600 leading-relaxed mb-6 flex-grow">
+								We provide welfare, housing support, and ongoing guidance for individuals who need continuous care.
+							</p>
+							<a href="/about" class="text-primary font-bold uppercase text-xs tracking-widest border-b-2 border-accent pb-1 w-fit hover:text-accent">Learn More</a>
+						</div>
+					</div>
+
+					<!-- Service Card 3 -->
+					<div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full">
+						<div class="h-56 overflow-hidden">
+							<Image src={advocacyCardImage} alt="Advocacy and Inclusion" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+						</div>
+						<div class="p-8 flex flex-col flex-grow">
+							<h3 class="text-2xl font-heading text-primary mb-4 uppercase tracking-tighter">Advocacy & Inclusion</h3>
+							<p class="text-slate-600 leading-relaxed mb-6 flex-grow">
+								We promote the rights and dignity of blind individuals ensuring they can participate fully in society.
+							</p>
+							<a href="/about" class="text-primary font-bold uppercase text-xs tracking-widest border-b-2 border-accent pb-1 w-fit hover:text-accent">Learn More</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Impact Snapshot Section -->
+		<section class="py-24 bg-primary text-white overflow-hidden relative">
+			<div class="container mx-auto px-4 relative z-10">
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+					<div>
+						<h2 class="text-4xl font-heading mb-8 border-b-4 border-accent pb-4 w-fit uppercase">Our Impact in Sabah</h2>
+						<p class="text-xl text-slate-300 mb-10 leading-relaxed">
+							For decades, we have worked to create meaningful change for visually impaired communities across the state.
+						</p>
+						<div class="space-y-8">
+							<div class="flex items-center space-x-6">
+								<span class="text-5xl font-heading text-accent font-bold">1966</span>
+								<p class="text-lg text-slate-200">Established as a beacon of hope in Kota Kinabalu.</p>
+							</div>
+							<div class="flex items-center space-x-6">
+								<span class="text-5xl font-heading text-accent font-bold">4+</span>
+								<p class="text-lg text-slate-200">Branches serving the entire state of Sabah.</p>
+							</div>
+							<div class="flex items-center space-x-6">
+								<span class="text-5xl font-heading text-accent font-bold">100%</span>
+								<p class="text-lg text-slate-200">Dedicated to transparency and community welfare.</p>
+							</div>
+						</div>
+					</div>
+					<div class="relative">
+						<div class="grid grid-cols-2 gap-6 relative z-10">
+							<div class="bg-white/5 backdrop-blur-lg p-8 rounded-3xl border border-white/10 text-center">
+								<p class="text-lg font-bold uppercase tracking-widest text-accent mb-2">Tawau</p>
+								<p class="text-xs text-slate-400">Branch Office</p>
+							</div>
+							<div class="bg-white/5 backdrop-blur-lg p-8 rounded-3xl border border-white/10 text-center">
+								<p class="text-lg font-bold uppercase tracking-widest text-accent mb-2">Sandakan</p>
+								<p class="text-xs text-slate-400">Branch Office</p>
+							</div>
+							<div class="bg-white/5 backdrop-blur-lg p-8 rounded-3xl border border-white/10 text-center">
+								<p class="text-lg font-bold uppercase tracking-widest text-accent mb-2">Keningau</p>
+								<p class="text-xs text-slate-400">Branch Office</p>
+							</div>
+							<div class="bg-accent text-primary p-8 rounded-3xl text-center">
+								<p class="text-lg font-bold uppercase tracking-widest mb-2">Join Us</p>
+								<p class="text-xs font-bold">Partner With Us</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Donation Appeal -->
+		<section class="py-24 bg-accent text-primary relative overflow-hidden">
+			<div class="container mx-auto px-4 text-center max-w-4xl relative z-10">
+				<h2 class="text-4xl md:text-6xl font-heading font-black mb-10 uppercase leading-none tracking-tighter">
+					Your Support Keeps This Mission Moving
+				</h2>
+				<p class="text-2xl mb-12 leading-relaxed font-bold max-w-3xl mx-auto">
+					Every donation makes a difference and helps Sabah Society for the Blind continue serving those who rely on our programs.
+				</p>
+				<Button variant="primary" href="/donate" class="text-xl px-16 py-6 shadow-2xl">Support Our Work</Button>
+			</div>
+		</section>
+
+		<!-- Contact Prompt -->
+		<section class="py-24 bg-white">
+			<div class="container mx-auto px-4">
+				<div class="bg-primary text-white rounded-[3rem] p-12 md:p-24 flex flex-col md:flex-row items-center justify-between gap-12 relative overflow-hidden">
+					<div class="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+					<div class="md:max-w-2xl relative z-10">
+						<h2 class="text-4xl md:text-5xl font-heading font-bold mb-6 uppercase tracking-tight">Need Information?</h2>
+						<p class="text-slate-300 text-xl leading-relaxed">
+							Whether you are a donor, volunteer, or family member, our team is ready to help. Reach out for any enquiries or partnership opportunities.
+						</p>
+					</div>
+					<Button variant="accent" href="/contact" class="relative z-10 !px-12">Contact Us</Button>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</BaseLayout>

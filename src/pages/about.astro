@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import { Image } from 'astro:assets';
+import communityImage from '../assets/food-donation-for-blind-hq.jpg';
+---
+
+<BaseLayout 
+	title="About Us | Sabah Society for the Blind"
+	image={communityImage.src}
+>
+	<Header />
+
+	<main>
+		<!-- Hero Section -->
+		<section class="bg-primary text-white py-20">
+			<div class="container mx-auto px-4">
+				<div class="max-w-3xl">
+					<h1 class="text-4xl md:text-5xl font-heading font-bold mb-6">About Sabah Society for the Blind</h1>
+					<p class="text-xl text-slate-200 leading-relaxed">
+						Sabah Society for the Blind is a non-profit organization dedicated to supporting blind and visually impaired individuals through care, training, advocacy, and opportunities for a more independent life.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Content Section -->
+		<section class="py-20 bg-white">
+			<div class="container mx-auto px-4">
+				<div class="flex flex-col md:flex-row gap-12 items-center">
+					<div class="md:w-1/2">
+						<div class="rounded-2xl overflow-hidden shadow-xl">
+							<Image src={communityImage} alt="Community support at Sabah Society for the Blind" class="w-full h-auto" />
+						</div>
+					</div>
+					<div class="md:w-1/2">
+						<h2 class="text-3xl font-heading text-primary mb-6">Serving the Blind Community in Sabah</h2>
+						<p class="text-lg text-slate-700 leading-relaxed mb-6">
+							For decades, the organization has worked to improve the lives of blind and visually impaired people across Sabah through meaningful support and practical services.
+						</p>
+						<p class="text-lg text-slate-700 leading-relaxed mb-8">
+							The organization exists to create a more inclusive and supportive future for visually impaired communities in Sabah. We believe that with the right support, dignity and opportunity become possible for every person.
+						</p>
+						<div class="grid grid-cols-2 gap-6">
+							<div class="border-l-4 border-accent pl-4">
+								<p class="text-2xl font-heading text-primary">Since 1966</p>
+								<p class="text-sm text-slate-500">Decades of Dedication</p>
+							</div>
+							<div class="border-l-4 border-accent pl-4">
+								<p class="text-2xl font-heading text-primary">Non-Profit</p>
+								<p class="text-sm text-slate-500">Public Supported</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Call to Action -->
+		<section class="py-20 bg-slate-50 text-center">
+			<div class="container mx-auto px-4">
+				<h2 class="text-3xl font-heading text-primary mb-8">Help Us Build a More Inclusive Future</h2>
+				<div class="flex justify-center gap-4">
+					<Button variant="primary" href="/donate">Donate Now</Button>
+					<Button variant="outline" href="/contact">Get in Touch</Button>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</BaseLayout>

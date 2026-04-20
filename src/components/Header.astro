@@ -1,0 +1,84 @@
+---
+import { Image } from 'astro:assets';
+import logoImage from '../assets/favicon.png';
+
+const navItems = [
+	{ name: 'Home', href: '/' },
+	{ name: 'About', href: '/about' },
+	{ name: 'Mission', href: '/mission' },
+	{ name: 'Media', href: '/media' },
+	{ name: 'History', href: '/history' },
+	{ name: 'Donate', href: '/donate' },
+	{ name: 'Contact', href: '/contact' },
+];
+
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname === '/' ? '/' : pathname.replace(/\/$/, "");
+---
+
+<header class="bg-primary text-white sticky top-0 z-50 shadow-md">
+	<div class="container mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
+		<!-- Logo / Brand -->
+		<a href="/" class="flex items-center space-x-3 group">
+			<div class="w-12 h-12 flex items-center justify-center overflow-hidden transition-transform group-hover:scale-110">
+				<Image src={logoImage} alt="Sabah Society for the Blind Logo" class="w-full h-full object-contain" />
+			</div>
+			<div class="flex flex-col">
+				<span class="font-heading text-xl uppercase tracking-wider group-hover:text-accent transition-colors leading-none">
+					Sabah Society for the Blind
+				</span>
+				<span class="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-bold group-hover:text-white transition-colors">
+					Serving Since 1966
+				</span>
+			</div>
+		</a>
+
+		<!-- Mobile Menu & High Contrast Toggle -->
+		<div class="flex items-center space-x-4">
+			<!-- High Contrast Toggle -->
+			<button 
+				id="hc-toggle"
+				class="p-2 border-2 border-accent text-accent hover:bg-accent hover:text-primary transition-all rounded text-[10px] font-black min-w-[44px] min-h-[44px] flex items-center justify-center uppercase tracking-tighter"
+				aria-label="Toggle High Contrast Mode"
+			>
+				HI-VIZ
+			</button>
+
+			<nav class="hidden md:flex space-x-6 uppercase font-heading text-sm font-medium">
+				{navItems.map(item => {
+					const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+					return (
+						<a 
+							href={item.href} 
+							class:list={[
+								"py-2 transition-all border-b-2",
+								isActive ? "text-accent border-accent font-bold" : "text-white border-transparent hover:text-accent hover:border-accent"
+							]}
+						>
+							{item.name}
+						</a>
+					);
+				})}
+			</nav>
+		</div>
+	</div>
+</header>
+
+<script>
+	const hcToggle = document.getElementById('hc-toggle');
+	
+	const updateToggleText = () => {
+		if (hcToggle) {
+			const isHC = document.documentElement.classList.contains('high-contrast');
+			hcToggle.textContent = isHC ? 'RESET' : 'HI-VIZ';
+		}
+	}
+
+	updateToggleText();
+
+	hcToggle?.addEventListener('click', () => {
+		const isHC = document.documentElement.classList.toggle('high-contrast');
+		localStorage.setItem('ssb-hc-mode', isHC ? 'enabled' : 'disabled');
+		updateToggleText();
+	});
+</script>
