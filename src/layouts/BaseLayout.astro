@@ -78,7 +78,7 @@ const organizationSchema = {
 		<meta property="twitter:image" content={socialImageURL} />
 
 		<!-- JSON-LD Schema -->
-		<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+		<script type="application/ld+json" set:html={JSON.stringify(organizationSchema).replace(/</g, '\\u003c')} />
 
 		<!-- Google Fonts: Oswald (Headings) and Manrope (Body) -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
