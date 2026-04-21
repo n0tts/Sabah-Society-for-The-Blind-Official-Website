@@ -16,35 +16,36 @@ const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname === '/' ? '/' : pathname.replace(/\/$/, "");
 ---
 
-<header class="bg-primary text-white sticky top-0 z-50 shadow-md">
-	<div class="container mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
+<header class="bg-primary text-white sticky top-0 z-50 shadow-md relative">
+	<div class="container mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
 		<!-- Logo / Brand -->
-		<a href="/" class="flex items-center space-x-3 group">
-			<div class="w-12 h-12 flex items-center justify-center overflow-hidden transition-transform group-hover:scale-110">
+		<a href="/" class="flex items-center space-x-2 md:space-x-3 group z-10 relative max-w-[80%]">
+			<div class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 flex items-center justify-center overflow-hidden transition-transform group-hover:scale-110">
 				<Image src={logoImage} alt="Sabah Society for the Blind Logo" class="w-full h-full object-contain" />
 			</div>
 			<div class="flex flex-col">
-				<span class="font-heading text-xl uppercase tracking-wider group-hover:text-accent transition-colors leading-none">
+				<span class="font-heading text-sm sm:text-base md:text-xl uppercase tracking-wider group-hover:text-accent transition-colors leading-tight">
 					Sabah Society for the Blind
 				</span>
-				<span class="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-bold group-hover:text-white transition-colors">
+				<span class="text-[8px] md:text-[10px] uppercase tracking-[0.1em] md:tracking-[0.2em] text-slate-400 font-bold group-hover:text-white transition-colors mt-0.5 md:mt-0">
 					Serving Since 1966
 				</span>
 			</div>
 		</a>
 
-		<!-- Mobile Menu & High Contrast Toggle -->
-		<div class="flex items-center space-x-4">
+		<!-- Mobile Menu Toggle & Desktop Nav -->
+		<div class="flex items-center space-x-2 md:space-x-4 flex-shrink-0">
 			<!-- High Contrast Toggle -->
 			<button 
 				id="hc-toggle"
-				class="p-2 border-2 border-accent text-accent hover:bg-accent hover:text-primary transition-all rounded text-[10px] font-black min-w-[44px] min-h-[44px] flex items-center justify-center uppercase tracking-tighter"
+				class="fixed bottom-4 right-4 z-[60] md:relative md:bottom-auto md:right-auto md:z-auto p-2 border-2 border-accent bg-primary md:bg-transparent text-accent hover:bg-accent hover:text-primary transition-all rounded text-[10px] font-black min-w-[44px] min-h-[44px] flex items-center justify-center uppercase tracking-tighter shadow-xl md:shadow-none"
 				aria-label="Toggle High Contrast Mode"
 			>
 				HI-VIZ
 			</button>
 
-			<nav class="hidden md:flex space-x-6 uppercase font-heading text-sm font-medium">
+			<!-- Desktop Nav -->
+			<nav class="hidden md:flex space-x-6 uppercase font-heading text-sm font-medium items-center">
 				{navItems.map(item => {
 					const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
 					return (
@@ -60,12 +61,50 @@ const currentPath = pathname === '/' ? '/' : pathname.replace(/\/$/, "");
 					);
 				})}
 			</nav>
+
+			<!-- Mobile Menu Button -->
+			<button
+				id="mobile-menu-toggle"
+				class="md:hidden p-2 text-white hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded transition-colors z-10 relative"
+				aria-label="Toggle mobile menu"
+				aria-expanded="false"
+			>
+				<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="hamburger-lines" d="M4 6h16M4 12h16M4 18h16"></path>
+				</svg>
+			</button>
 		</div>
+	</div>
+
+	<!-- Mobile Menu Dropdown -->
+	<div 
+		id="mobile-menu" 
+		class="hidden md:hidden absolute top-full left-0 w-full bg-primary/95 backdrop-blur-md border-t border-slate-700/50 shadow-2xl transition-all duration-300 origin-top"
+	>
+		<nav class="flex flex-col px-6 py-6 space-y-2 uppercase font-heading text-base font-medium max-h-[calc(100vh-80px)] overflow-y-auto">
+			{navItems.map(item => {
+				const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+				return (
+					<a 
+						href={item.href} 
+						class:list={[
+							"py-3 px-4 transition-all w-full text-center rounded-lg border border-transparent",
+							isActive ? "text-accent font-bold bg-white/5 border-accent/20" : "text-white hover:text-accent hover:bg-white/5"
+						]}
+					>
+						{item.name}
+					</a>
+				);
+			})}
+		</nav>
 	</div>
 </header>
 
 <script>
 	const hcToggle = document.getElementById('hc-toggle');
+	const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+	const mobileMenu = document.getElementById('mobile-menu');
+	const hamburgerLines = document.querySelector('.hamburger-lines');
 	
 	const updateToggleText = () => {
 		if (hcToggle) {
@@ -80,5 +119,22 @@ const currentPath = pathname === '/' ? '/' : pathname.replace(/\/$/, "");
 		const isHC = document.documentElement.classList.toggle('high-contrast');
 		localStorage.setItem('ssb-hc-mode', isHC ? 'enabled' : 'disabled');
 		updateToggleText();
+	});
+
+	// Mobile menu toggle logic
+	mobileMenuToggle?.addEventListener('click', () => {
+		const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+		mobileMenuToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+		
+		if (mobileMenu) {
+			mobileMenu.classList.toggle('hidden');
+			
+			// Animate hamburger icon
+			if (!isExpanded) {
+				hamburgerLines?.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+			} else {
+				hamburgerLines?.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+			}
+		}
 	});
 </script>
