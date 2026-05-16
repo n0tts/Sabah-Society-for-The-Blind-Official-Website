@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const allAnnouncements = await getCollection('announcements');
+const publishedAnnouncements = allAnnouncements
+	.filter((a) => !a.data.draft)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const formatDate = (date: Date) =>
+	new Intl.DateTimeFormat('en-MY', { year: 'numeric', month: 'long', day: '2-digit' }).format(date);
+---
+
+<BaseLayout title="Announcements | Sabah Society for the Blind" description="Read the latest announcements, notices, and updates from Sabah Society for the Blind.">
+	<Header />
+
+	<main>
+		<section class="bg-primary text-white py-14 md:py-16">
+			<div class="container mx-auto px-4">
+				<div class="max-w-4xl">
+					<h1 class="text-3xl md:text-5xl font-heading font-bold mb-4">Announcements</h1>
+					<p class="text-slate-200 text-lg">Stay updated with the latest news, notices, and events.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="py-16 md:py-20 bg-slate-50">
+			<div class="container mx-auto px-4">
+				<div class="max-w-4xl mx-auto">
+					<div class="grid gap-8">
+						{publishedAnnouncements.length === 0 ? (
+							<div class="bg-white p-8 rounded-lg shadow-sm border border-slate-100 text-center">
+								<p class="text-slate-500">No announcements found at the moment. Please check back later.</p>
+							</div>
+						) : (
+							publishedAnnouncements.map((announcement) => (
+								<article class="bg-white p-6 md:p-8 rounded-lg shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+									<p class="text-sm uppercase tracking-widest text-primary mb-2 font-semibold">
+										{formatDate(announcement.data.pubDate)}
+									</p>
+									<h2 class="text-2xl font-heading font-bold mb-3 text-slate-800">
+										<a href={`/announcements/${announcement.id}`} class="hover:text-accent transition-colors">
+											{announcement.data.title}
+										</a>
+									</h2>
+									<p class="text-slate-600 mb-6 line-clamp-2">
+										{announcement.data.description}
+									</p>
+									<a 
+										href={`/announcements/${announcement.id}`}
+										class="inline-flex items-center gap-2 font-heading uppercase text-sm font-bold text-white bg-primary hover:bg-accent px-5 py-2.5 rounded transition-colors"
+									>
+										Read more
+										<span aria-hidden="true">→</span>
+									</a>
+								</article>
+							))
+						)}
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</BaseLayout>
