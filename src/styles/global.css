@@ -48,28 +48,73 @@
 @layer components {
   /* High Contrast Mode */
   :root.high-contrast {
-    background-color: #000;
-    color: #fff;
-  }
-
-  .high-contrast body {
     background-color: #000 !important;
     color: #fff !important;
   }
 
+  .high-contrast body,
+  .high-contrast main,
+  .high-contrast section,
+  .high-contrast header,
+  .high-contrast footer,
+  .high-contrast div,
+  .high-contrast nav,
+  .high-contrast article,
+  .high-contrast aside,
+  .high-contrast span,
+  .high-contrast p,
+  .high-contrast h1,
+  .high-contrast h2,
+  .high-contrast h3,
+  .high-contrast h4,
+  .high-contrast h5,
+  .high-contrast h6,
+  .high-contrast ul,
+  .high-contrast li,
+  .high-contrast ol,
+  .high-contrast input,
+  .high-contrast textarea,
+  .high-contrast select,
+  .high-contrast label,
+  .high-contrast address,
+  .high-contrast strong {
+    background-color: #000 !important;
+    color: #fff !important;
+    background-image: none !important;
+    border-color: #fff !important;
+  }
+
   .high-contrast * {
     border-color: #fff !important;
+    box-shadow: none !important;
   }
 
   .high-contrast a, 
   .high-contrast button {
     color: #ffff00 !important;
+    background-color: #000 !important;
     text-decoration: underline !important;
+    border: 1px solid #ffff00 !important;
+    padding: 2px 4px;
   }
 
-  .high-contrast .btn-primary {
+  .high-contrast .btn-primary,
+  .high-contrast .btn-accent,
+  .high-contrast button[class*="bg-"],
+  .high-contrast a[class*="bg-"] {
     background-color: #000 !important;
     color: #ffff00 !important;
-    border: 2px solid #ffff00 !important;
+    border: 3px solid #ffff00 !important;
+    text-decoration: none !important;
+  }
+
+  .high-contrast img {
+    filter: grayscale(100%) contrast(150%) !important;
+    border: 2px solid #fff !important;
+  }
+
+  .high-contrast svg {
+    fill: currentColor !important;
+    stroke: currentColor !important;
   }
 }
